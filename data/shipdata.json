@@ -1,0 +1,8 @@
+{
+    "testship": {
+        "max_forward": 200,
+        "max_reverse": 50,
+        "max_side": 100,
+        "stop_distance": 4
+    }
+}

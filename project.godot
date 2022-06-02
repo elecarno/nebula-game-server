@@ -11,8 +11,12 @@ config_version=4
 [application]
 
 config/name="network_testing_server"
-run/main_scene="res://server.tscn"
+run/main_scene="res://scenes/main/server.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+serverdata="*res://scenes/singletons/serverdata.gd"
 
 [physics]
 
