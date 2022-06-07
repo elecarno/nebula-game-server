@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="network_testing_server"
+config/name="nebula_game_server"
 run/main_scene="res://scenes/main/server.tscn"
 config/icon="res://icon.png"
 

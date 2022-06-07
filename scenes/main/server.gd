@@ -24,9 +24,7 @@ func _player_disconnected(player_id):
 # called by `rpc_id()` from client
 remote func fetch_shipdata(ship_name, requester):
 	print("shipdata requested")
-	# `get_rpc_sender_id()` gets the id of the instance who made the intial call
-	var player_id = get_tree().get_rpc_sender_id()
-	var shipdata = serverdata.shipdata[ship_name]
-	# `rpc_id()` calls `remote func return_shipdata()` on the client
-	rpc_id(player_id, "return_shipdata", shipdata, requester)
-	print("sending " + str(shipdata) + " to player")
+	var player_id = get_tree().get_rpc_sender_id() # `get_rpc_sender_id()` gets the id of the instance who made the intial call
+	var shipdata = get_node("ships").fetch_shipdata(ship_name)
+	rpc_id(player_id, "return_shipdata", shipdata, requester) # `rpc_id()` calls `remote func return_shipdata()` on the client
+	print("sending data for ship: " + str(ship_name) + " to player")
