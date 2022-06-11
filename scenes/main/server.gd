@@ -1,7 +1,7 @@
 extends Node2D
 
 var network = NetworkedMultiplayerENet.new()
-var port = 5000
+var port = 1909
 var max_players = 250
 
 func _ready():
