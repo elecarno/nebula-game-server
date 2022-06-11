@@ -1,6 +1,13 @@
 extends Node
 
 var shipdata
+var test_data = {
+	"stats": {
+		"hp": 100,
+		"oxygen": 100,
+		"hunger": 100
+	}
+}
 
 func _ready():
 	var shipdata_file = File.new()
