@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 serverdata="*res://scenes/singletons/serverdata.gd"
+hubconnection="*res://scenes/singletons/hubconnection.gd"
 
 [physics]
 

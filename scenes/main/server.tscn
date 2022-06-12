@@ -12,3 +12,14 @@ script = ExtResource( 2 )
 
 [node name="player_verification" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="verification_expiration" type="Timer" parent="player_verification"]
+wait_time = 10.0
+autostart = true
+
+[node name="token_expiration" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="player_verification/verification_expiration" to="player_verification" method="_on_verification_expiration_timeout"]
+[connection signal="timeout" from="token_expiration" to="." method="_on_token_expiration_timeout"]
