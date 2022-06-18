@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/main/server.gd" type="Script" id=1]
 [ext_resource path="res://scenes/main/ships.gd" type="Script" id=2]
 [ext_resource path="res://scenes/singletons/player_verification.gd" type="Script" id=3]
+[ext_resource path="res://scenes/main/state_processing.gd" type="Script" id=4]
 
 [node name="server" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,6 +17,9 @@ script = ExtResource( 3 )
 [node name="verification_expiration" type="Timer" parent="player_verification"]
 wait_time = 10.0
 autostart = true
+
+[node name="state_processing" type="Node2D" parent="."]
+script = ExtResource( 4 )
 
 [node name="token_expiration" type="Timer" parent="."]
 wait_time = 10.0

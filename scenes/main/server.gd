@@ -5,6 +5,7 @@ var port = 1909
 var max_players = 250
 
 var expected_tokens = []
+var player_state_collection = {}
 
 onready var player_verification_process = get_node("player_verification")
 onready var ship_functions = get_node("ships")
@@ -26,7 +27,10 @@ func _player_connected(player_id):
 	
 func _player_disconnected(player_id):
 	print("player " + str(player_id) + " disconnected")
-	get_node(str(player_id)).queue_free()
+	if has_node(str(player_id)):
+		get_node(str(player_id)).queue_free()
+		player_state_collection.erase(player_id)
+		rpc_id(0, "despawn_player", player_id)
 	
 func _on_token_expiration_timeout():
 	var current_time = OS.get_unix_time()
@@ -48,6 +52,19 @@ remote func return_token(token):
 	
 func return_token_verification_results(player_id, result):
 	rpc_id(player_id, "return_token_verification_results", result)
+	if result == true:
+		rpc_id(0, "spawn_new_player", player_id, Vector2(0, 0))
+		
+remote func recieve_player_state(player_state):
+	var player_id = get_tree().get_rpc_sender_id()
+	if player_state_collection.has(player_id):
+		if player_state_collection[player_id]["t"] < player_state["t"]:
+			player_state_collection[player_id] = player_state
+	else:
+		player_state_collection[player_id] = player_state
+
+func send_world_state(world_state):
+	rpc_unreliable_id(0, "recieve_world_state", world_state)
 
 # called by `rpc_id()` from client
 remote func fetch_shipdata(ship_name, requester):
