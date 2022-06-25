@@ -42,6 +42,14 @@ func _on_token_expiration_timeout():
 			token_time = int(expected_tokens[i].right(64))
 			if current_time - token_time >= 30:
 				expected_tokens.remove(i)
+				
+remote func fetch_server_time(client_time):
+	var player_id = get_tree().get_rpc_sender_id()
+	rpc_id(player_id, "return_server_time", OS.get_system_time_msecs(), client_time)
+
+remote func determine_latency(client_time):
+	var player_id = get_tree().get_rpc_sender_id()
+	rpc_id(player_id, "return_latency", client_time)
 
 func fetch_token(player_id):
 	rpc_id(player_id, "fetch_token")
