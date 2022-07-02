@@ -73,6 +73,10 @@ remote func recieve_player_state(player_state):
 
 func send_world_state(world_state):
 	rpc_unreliable_id(0, "recieve_world_state", world_state)
+	
+remote func attack(positon, rotation_deg, rotation, spawn_time):
+	var player_id = get_tree().get_rpc_sender_id()
+	rpc_id(0, "recieve_attack", position, rotation_deg, rotation, spawn_time, player_id)
 
 # called by `rpc_id()` from client
 remote func fetch_shipdata(ship_name, requester):
@@ -81,6 +85,9 @@ remote func fetch_shipdata(ship_name, requester):
 	var shipdata = ship_functions.fetch_shipdata(ship_name, player_id)
 	rpc_id(player_id, "return_shipdata", shipdata, requester) # `rpc_id()` calls `remote func return_shipdata()` on the client
 	print("sending data for ship: " + str(ship_name) + " to player")
+
+remote func send_npc_hit(enemy_id, damage):
+	get_node("map").npc_hit(enemy_id, damage)
 
 remote func fetch_playerstats():
 	var player_id = get_tree().get_rpc_sender_id()

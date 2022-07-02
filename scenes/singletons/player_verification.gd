@@ -39,9 +39,7 @@ func _on_verification_expiration_timeout():
 				if connected_peers.has(key):
 					main_interface.return_token_verification_results(key, false)
 					main_interface.network.disconnect_peer(key)
-	print("awaiting verification:")
-	print(awaiting_verification)
-	
+
 func create_player_container(player_id):
 	var new_player_container = player_container_scene.instance()
 	new_player_container.name = str(player_id)
