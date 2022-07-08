@@ -3,7 +3,7 @@ extends Node2D
 var enemy_id_counter = 1
 var enemy_max = 2
 var enemy_types = ["auto_turret"]
-var enemy_spawn_points = [Vector2(66, -56), Vector2(12, 136)]
+var enemy_spawn_points = [Vector2(-500, -100), Vector2(-510, -100)]
 var open_locations = [0, 1]
 var occupied_locations = {}
 var enemy_list = {}

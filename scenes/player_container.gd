@@ -1,3 +1,4 @@
 extends Node2D
 
-var player_stats
+var playerdata
+var playeruser

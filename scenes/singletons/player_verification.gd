@@ -49,5 +49,5 @@ func create_player_container(player_id):
 	
 func fill_player_container(player_container):
 	print(player_container)
-	player_container.player_stats = serverdata.test_data.stats
+	player_container.playerdata = serverdata.default_data
 

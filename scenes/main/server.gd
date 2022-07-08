@@ -89,7 +89,22 @@ remote func fetch_shipdata(ship_name, requester):
 remote func send_npc_hit(enemy_id, damage):
 	get_node("map").npc_hit(enemy_id, damage)
 
-remote func fetch_playerstats():
+remote func fetch_playerdata(playeruser):
 	var player_id = get_tree().get_rpc_sender_id()
-	var player_stats = get_node(str(player_id)).player_stats
-	rpc_id(player_id, "return_player_stats", player_stats)
+	get_node(str(player_id)).playeruser = playeruser
+	var playerdata
+	var create = true
+	for user in serverdata.playerdata:
+		if user == playeruser:
+			playerdata = serverdata.playerdata[playeruser]
+			create = false
+			print("loaded data" + str(serverdata.playerdata[playeruser]) + " for " + str(player_id) + ", user: " + str(playeruser))
+	if create == true:
+		playerdata = serverdata.default_data
+		serverdata.write_playerdata(playeruser, player_id)
+		print("created player data entry for " + str(player_id) + ", user: " + str(playeruser))
+	rpc_id(player_id, "return_playerdata", playerdata)
+
+remote func write_playerdata_update(playeruser, newdata):
+	var player_id = get_tree().get_rpc_sender_id()
+	serverdata.write_playerdata_update(playeruser, player_id, newdata)
