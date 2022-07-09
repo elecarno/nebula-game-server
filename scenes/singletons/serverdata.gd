@@ -4,10 +4,16 @@ var shipdata
 var playerdata
 var default_data = {
 	"credits": 2500,
+	"pos": {
+		"x": -648,
+		"y": -31
+	},
 	"stats": {
 		"hp": 100,
 		"oxygen": 100,
-		"hunger": 100
+		"nitrogen": 100,
+		"hunger": 100,
+		"helmet": true
 	},
 	"ships": {},
 }
