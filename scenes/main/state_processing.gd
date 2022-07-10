@@ -9,6 +9,7 @@ func _physics_process(delta):
 			world_state[player].erase("t")
 		world_state["t"] = OS.get_system_time_msecs()
 		world_state["enemies"] = get_node("../map").enemy_list
+		world_state["pickups"] = get_node("../map").pickup_list
 		# verifications
 		# anti cheat
 		# cuts ( chunking / maps )

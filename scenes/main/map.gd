@@ -8,13 +8,18 @@ var open_locations = [0, 1]
 var occupied_locations = {}
 var enemy_list = {}
 
+var pickup_id_counter = 1
+var pickup_max = 500
+var pickup_list = {}
+
 func _ready():
 	var timer = Timer.new()
 	timer.wait_time = 3
 	timer.autostart = true
 	timer.connect("timeout", self, "spawn_enemy")
 	self.add_child(timer)
-
+	spawn_pickup(Vector2(-648, -31), "crate")
+	
 func spawn_enemy():
 	if enemy_list.size() >= enemy_max:
 		pass
@@ -43,3 +48,10 @@ func npc_hit(enemy_id, damage):
 			enemy_list[enemy_id]["enemy_state"] == "dead"
 			open_locations.append(occupied_locations[enemy_id])
 			occupied_locations.erase(enemy_id)
+
+func spawn_pickup(pos, type):
+	if pickup_list.size() >= pickup_max:
+		pass
+	else:
+		pickup_list[pickup_id_counter] = {"pickup_position": pos, "pickup_type": type}
+		pickup_id_counter += 1

@@ -41,7 +41,6 @@ func write_playerdata(playeruser, player_id):
 
 func write_playerdata_update(playeruser, player_id, newdata):
 	playerdata[playeruser] = newdata
-	print(str(playerdata))
 	var file = File.new()
 	file.open("res://data/playergamedata.json", File.WRITE)
 	file.store_line(to_json(playerdata))
