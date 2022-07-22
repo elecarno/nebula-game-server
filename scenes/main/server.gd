@@ -71,6 +71,11 @@ remote func recieve_player_state(player_state):
 	else:
 		player_state_collection[player_id] = player_state
 
+remote func recieve_pickup_state(pickup_state, pickup_id):
+	if get_node("state_processing").world_state["pickups"].has(int(pickup_id)):
+		if OS.get_unix_time() < pickup_state["t"]:
+			get_node("state_processing").world_state["pickups"][int(pickup_id)]["pickup_position"] = pickup_state["p"]
+
 func send_world_state(world_state):
 	rpc_unreliable_id(0, "recieve_world_state", world_state)
 	
