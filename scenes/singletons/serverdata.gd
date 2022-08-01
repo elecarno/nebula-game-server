@@ -13,7 +13,8 @@ var default_data = {
 		"oxygen": 100,
 		"nitrogen": 100,
 		"hunger": 100,
-		"helmet": true
+		"helmet": true,
+		"armed": false
 	},
 	"ships": {},
 }
